@@ -6,23 +6,23 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div *ngIf="user.id" class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" routerLike="/home">Inicio</a>
+                    <a class="nav-link active" aria-current="page" routerLink="/home">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" routerLike="/posts">Publicaciones</a>
+                    <a class="nav-link active" aria-current="page" routerLink="/posts">Publicaciones</a>
+                </li>
+                <li *ngIf="user.role == 'admin'" class="nav-item">
+                    <a class="nav-link active" aria-current="page" routerLink="/user">Usuarios</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" routerLike="/user">Usuarios</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" routerLike="/">Salir</a>
+                    <a (click)="salir()" class="nav-link active" aria-current="page" routerLink="/">Salir</a>
                 </li>
             </ul>
             <span class="navbar-text border border-secundary rounded-pill ps-2 pe-2">
-                Username
+                {{user.username}}
             </span>
         </div>
     </div>
