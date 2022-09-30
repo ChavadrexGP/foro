@@ -1,5 +1,7 @@
+import { Serializer } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ApiRestService } from '../api-rest.service';
+
 
 @Component({
   selector: 'app-menu',
@@ -19,8 +21,7 @@ export class MenuComponent implements OnInit {
       }
     );
   }
-
-  salir(){
+  salir() {
     this.rest.setUser({ id: 0, username: '', role: '' });
   }
 

@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import {BehaviorSubject} from 'rxjs';
+import { BehaviorSubject} from 'rxjs';
 
-const URL = 'https://devel.cdhidalgo.tecnm.mx/~iraic/foro-rest';
+const URL = "https://devel.cdhidalgo.tecnm.mx/~iraic/foro-rest";
 
 interface User {
   id:number,
   username:string,
   role:string
 }
-
 interface Login {
   user:User,
   token:string
@@ -21,7 +20,7 @@ interface Login {
 export class ApiRestService {
   private user:User = {id:0, username:'', role:''};
   private userObs = new BehaviorSubject<User>(this.user);
-  userObs$ = this.userObs.asObservable();
+  userObs$ =this.userObs.asObservable();
 
   constructor(private http: HttpClient) { }
   
@@ -37,24 +36,37 @@ export class ApiRestService {
     this.user.id = parseInt(localStorage.getItem('id') || '0');
     this.user.username = (localStorage.getItem('username') || '');
     this.user.role = (localStorage.getItem('role') || '');
-
     return this.user;
   }
 
   login(user:string, pass:string){
-    return this.http.get<Login>(URL+'/login', 
-    {params:{username:user, password:pass}});
+    return this.http.get<Login>(URL+'/login',
+      {params:{username:user, password:pass}});
   }
 
+  //CRUD (create, read, update, delete)
   getTopics(url:string){
     if(url == '') url = URL+'/topics';
     const token = localStorage.getItem('token') || '';
-    return this.http.get<any>(url, {headers:{Autorization:token}});
+    return this.http.get<any>(url,{headers:{Authorization:token}});
   }
 
-  postTopics(post:any){
+  postTopics(topic:any){
     const token = localStorage.getItem('token') || '';
-    return this.http.post<any>( URL+'/topics', {title:post.title}, 
-    {headers:{Autorization:token}});
+    return this.http.post<any>(URL+'/topics',{title:topic.title}, 
+      {headers:{Authorization:token}});
   }
+
+  putTopics(topic:any){
+    const token = localStorage.getItem('token') || '';
+    return this.http.put<any>(URL+'/topics/'+topic.id,{title:topic.title}, 
+      {headers:{Authorization:token}});
+  }
+
+  deleteTopics(topic:any){
+    const token = localStorage.getItem('token') || '';
+    return this.http.delete<any>(URL+'/topics/'+topic.id, 
+      {headers:{Authorization:token}});
+  }
+
 }
