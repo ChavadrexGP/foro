@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ApiRestService } from '../api-rest.service';
 
 @Component({
@@ -15,7 +17,9 @@ export class HomeComponent implements OnInit {
   tmpTopic = {id:0, title:'', user_id:0};
   user = {id:0, username:'', role:''};
 
-  constructor(private rest: ApiRestService) { }
+  constructor(private rest: ApiRestService,
+      private router: Router,
+      private msg: ToastrService) { }
 
   ngOnInit(): void {
     this.readTopics();
@@ -35,6 +39,8 @@ export class HomeComponent implements OnInit {
     this.rest.postTopics(this.newTopic).subscribe(
       r => {
         this.readTopics();
+        this.router.navigate(['/home']);
+        this.msg.success("Agregado exitosamente");
       }
     );
   }
@@ -47,9 +53,12 @@ export class HomeComponent implements OnInit {
     this.rest.putTopics(this.tmpTopic).subscribe(
       r => {
         this.readTopics();
+        this.router.navigate(['/home']);
+        this.msg.success("Modificado exitosamente");
       },
       e =>{
         console.log(e);
+        this.msg.error("Error no se pudo modificar", e.status)
       }
     );
   }
@@ -58,10 +67,15 @@ export class HomeComponent implements OnInit {
     this.rest.deleteTopics(this.tmpTopic).subscribe(
       r => {
         this.readTopics();
+        this.router.navigate(['/home']);
+        this.msg.success("Eliminado exitosamente");
       },
       e =>{
         console.log(e);
+        this.msg.error("Error no se pudo eliminar", e.status)
       }
     );
   }
+
+
 }

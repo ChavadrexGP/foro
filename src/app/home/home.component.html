@@ -15,24 +15,23 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <input (click)="createTopic()" type="button" value="Guardar" class="btn btn-success float-end">
+                    <button (click)="createTopic()" class="btn btn-success float-end"><i class="bi bi-save2"></i> Agregar</button>
                 </div>
             </div>
         </div>
         <div class="col"></div>
     </div>
     <div class="row">
-        <table class="table table-hover" [class.table-dark]="user.role =='admin'">
+        <table class="table table-hover  table-striped" [class.table-success]="user.role =='admin'">
             <thead>
                 <tr>
-                    <th>Id</th>
                     <th>Tema</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let topic of topics">
-                    <td>{{topic.id}}</td>
+                    
                     <td>{{topic.title}}</td>
                     <th>
                         <button *ngIf="user.role == 'admin' || user.id == topic.user_id" data-bs-toggle="modal" data-bs-target="#deleteTopic" (click)="selectTmpTopic(topic)" class="btn btn-outline-danger btn-sm float-end"><i class="bi bi-trash-fill"></i></button>
@@ -66,8 +65,8 @@
           <input [(ngModel)]="tmpTopic.title" type="text" class="form-control">
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button (click)="updateTopic()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-octagon-fill"></i> Cancelar</button>
+          <button (click)="updateTopic()" type="button" class="btn btn-primary" data-bs-dismiss="modal"> <i class="bi bi-save2"></i> Guardar cambios</button>
         </div>
       </div>
     </div>
@@ -85,8 +84,8 @@
           ¿Esta seguro de eliminar el tema <b>{{tmpTopic.title}}</b>?
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-          <button (click)="deleteTopic()" type="button" class="btn btn-danger" data-bs-dismiss="modal">Si</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> <i class="bi bi-x-octagon-fill"></i> No</button>
+          <button (click)="deleteTopic()" type="button" class="btn btn-danger" data-bs-dismiss="modal"> <i class="bi bi-hand-thumbs-up-fill"></i> Si</button>
         </div>
       </div>
     </div>

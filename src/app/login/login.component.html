@@ -2,14 +2,14 @@
     <div class="row">
         <div class="col"></div>
         <div class="col">
-            <div class="card" style="width: 18rem;">
+            <div class="card mt-3 mb-3" style="width: 18rem;">
                 <div class="card-header">
                     Inicio de Sesión
                 </div>
                 <div class="card-body">
                     <div class="input-group mb-3">
                         <div class="input-group-text">
-                            <i class="bi bi-person-circle"></i>
+                            <i class="bi bi-person-workspace"></i>
                         </div>
                         <input [(ngModel)]="user" type="text" class="form-control" placeholder="Nombre de usuario">
                     </div>
@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button (click)="entrar()" class="btn btn-primary">Entrar</button>
+                    <button (click)="entrar()" class="btn btn-primary"><i class="bi bi-door-open-fill"></i> Entrar</button>
                 </div>
             </div>
         </div>
